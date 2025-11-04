@@ -1,29 +1,28 @@
-import React, { useState } from 'react';
-import { LogIn } from 'lucide-react';
-import { useAuth } from 'src/context/AuthContext';
+import React, { useState } from "react";
+import { LogIn } from "lucide-react";
+import { useAuth } from "src/context/AuthContext";
 
 // --- Page 5: Login Page ---
 function LoginPage({ navigate, message }) {
   const { login } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
     try {
       await login(email, password);
-      navigate('dashboard')
+      navigate("dashboard");
     } catch (err) {
       setError(err.message);
     } finally {
       setLoading(false);
     }
   };
-
   return (
     <div className="flex justify-center items-center py-20 px-4">
       <div className="w-full max-w-md bg-gray-900 border border-gray-800 rounded-xl p-8 shadow-xl">
@@ -32,13 +31,23 @@ function LoginPage({ navigate, message }) {
           <h2 className="text-3xl font-bold text-white">Sign In</h2>
           <p className="text-gray-400">Access your CryptoInsight dashboard.</p>
         </div>
-        
-        {message && <div className="mb-4 p-3 bg-yellow-900 text-yellow-200 border border-yellow-700 rounded-lg">{message}</div>}
-        {error && <div className="mb-4 p-3 bg-red-900 text-red-200 border border-red-700 rounded-lg">{error}</div>}
+
+        {message && (
+          <div className="mb-4 p-3 bg-yellow-900 text-yellow-200 border border-yellow-700 rounded-lg">
+            {message}
+          </div>
+        )}
+        {error && (
+          <div className="mb-4 p-3 bg-red-900 text-red-200 border border-red-700 rounded-lg">
+            {error}
+          </div>
+        )}
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Email
+            </label>
             <input
               type="email"
               value={email}
@@ -48,7 +57,9 @@ function LoginPage({ navigate, message }) {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+            <label className="block text-sm font-medium text-gray-300 mb-2">
+              Password
+            </label>
             <input
               type="password"
               value={password}
@@ -63,14 +74,17 @@ function LoginPage({ navigate, message }) {
               disabled={loading}
               className="w-full py-3 px-4 bg-green-500 text-black font-bold rounded-lg hover:bg-green-400 transition-colors disabled:bg-gray-600"
             >
-              {loading ? 'Signing In...' : 'Sign In'}
+              {loading ? "Signing In..." : "Sign In"}
             </button>
           </div>
         </form>
-        
+
         <p className="text-center text-gray-400 mt-6">
-          Don't have an account?{' '}
-          <button onClick={() => navigate('signup')} className="font-medium text-green-400 hover:underline">
+          Don't have an account?{" "}
+          <button
+            onClick={() => navigate("signup")}
+            className="font-medium text-green-400 hover:underline"
+          >
             Sign Up
           </button>
         </p>

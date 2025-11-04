@@ -18,8 +18,13 @@ const AuthProvider = ({ children }) => {
       } catch (error) {
         console.error('Invalid token:', error);
         localStorage.removeItem('token');
-      }
-    }
+      } 
+      //token.split('.')[1] Token ko 3 parts me todta hai → 2nd part payload ko le raha hai
+    } //Payload is information of user (id, email, role, expiry time)
+    //Signature Token ki security, so that koi modify na kare
+    //atob Encoded payload ko decode karta hai
+    //JSON.parse(...)- Decode hua text ko JSON object me convert karta hai
+    //setUser({ id, email })- User ki info State me store karta hai → taaki UI me use ho
     setLoading(false);
   }, []);
 
