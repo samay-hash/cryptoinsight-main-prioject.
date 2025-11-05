@@ -1,5 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
-const bcrypt = require("bcryptjs"); //securely encrypt the password so that plain text password DB me store na ho
+const bcrypt = require("bcryptjs"); //securely encrypt the password 
 const jwt = require("jsonwebtoken"); //Login hone ke baad token issue karne ke liye
 
 const prisma = new PrismaClient();
@@ -26,7 +26,7 @@ const signup = async (req, res) => {
       { userId: user.id, email: user.email },
       process.env.JWT_SECRET || "your-secret-key",
       {
-        expiresIn: "10d",
+        expiresIn: "20d",
       }
     ); //jwt.sign- Token create, userId, email, Token payload → verify karne me kaam aayega, JWT_SECRET-Token encryption key
 
